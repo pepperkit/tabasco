@@ -123,7 +123,7 @@ type TextResponse struct {
 }
 
 func info() {
-	fmt.Println("Tabasco is CLI tool to generate a placeholder text akka 'Lorem ipsum' generator.")
+	fmt.Println("Tabasco is CLI tool to generate a placeholder text akka 'Lorem ipsum'.")
 	fmt.Println("")
 	fmt.Println("Usage: ")
 	fmt.Println("\t tabasco [--arguments]")
