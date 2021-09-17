@@ -28,7 +28,19 @@ Copyright (c) 2021 PepperKit.
 ### Generate 1Mb size text file
 
 ```
-./tabasco --file lorem.txt --size 1 --mb
+$ tabasco --file lorem.txt --size 1 --mb
+```
+
+### Generate 2Kb size text file
+
+```
+$ tabasco --file lorem.txt --size 2 --kb
+```
+
+### Generate 512 bytes size text file
+
+```
+$ tabasco --file lorem.txt --size 512
 ```
 
 ## License
