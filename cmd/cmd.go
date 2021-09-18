@@ -39,7 +39,7 @@ func ValidateFileSize(args *TabascoArgs) {
 }
 
 func Info(args *TabascoArgs) {
-	if args.FileSize <= 0 && !args.UnitKiloByte && !args.UnitMegaByte && len(args.FileName) <= 0 {
+	if args.FileSize <= 0 && len(args.FileName) <= 0 {
 		fmt.Println("Tabasco is a CLI tool to generate a placeholder text akka 'Lorem ipsum'.")
 		fmt.Println("")
 		fmt.Println("Usage: ")
