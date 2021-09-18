@@ -74,7 +74,8 @@ func generateTextBySize(args *cmd.TabascoArgs, writer *bufio.Writer) {
 			totalSize += size
 		}
 	}
-	writer.Flush()
+	err := writer.Flush()
+	checkError(err)
 }
 
 func checkError(err error) {
