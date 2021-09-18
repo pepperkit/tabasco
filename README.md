@@ -9,7 +9,7 @@ Tabasco is a CLI tool to generate a placeholder text akka 'Lorem ipsum'.
 Usage:
 	 tabasco [--arguments]
 
-The argumnets are:
+The arguments are:
 	 file 	 a file name
 	 size 	 an expected file size (in bytes by default)
 	 kb 	 a size will be read as KBytes
