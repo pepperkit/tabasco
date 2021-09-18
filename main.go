@@ -18,14 +18,14 @@ func main() {
 	cmd.Info(args)
 	cmd.ValidateFileSize(args)
 
-	f, err := os.Create(args.FileName)
+	file, err := os.Create(args.FileName)
 	checkError(err)
 
-	defer f.Close()
+	defer file.Close()
 
-	f.Sync()
+	file.Sync()
 
-	w := bufio.NewWriter(f)
+	writer := bufio.NewWriter(file)
 	expectedSize := args.FileSize
 	paragraphSize := 1 // default size
 
@@ -56,19 +56,19 @@ func main() {
 
 			str := string(potentialContent[0:needBytes])
 
-			size, err := w.WriteString(str)
+			size, err := writer.WriteString(str)
 			checkError(err)
 
 			totalSize += size
 		} else {
-			size, err := w.WriteString(res.Content)
+			size, err := writer.WriteString(res.Content)
 			checkError(err)
 			totalSize += size
 		}
 	}
 
-	w.Flush()
-	fi, _ := f.Stat()
+	writer.Flush()
+	fi, _ := file.Stat()
 	fmt.Printf("Complete! The file %s has been generated.\n", fi.Name())
 	fmt.Printf("File size is %d bytes.", fi.Size())
 }
