@@ -3,39 +3,23 @@ package main
 import (
 	"bufio"
 	"encoding/json"
-	"flag"
 	"fmt"
 	"io/ioutil"
 	"log"
 	"net/http"
 	"os"
+	"pepperkit/tabasco/cmd"
 	"strconv"
 )
 
 const BYTE_FACTOR = 1024
 
 func main() {
+	args := cmd.Parse()
+	cmd.Info(args)
+	cmd.ValidateFileSize(args)
 
-	inputFileName := flag.String("file", "", "a file name")
-	inputExpectedSize := flag.Int("size", 0, "a file expected size in bytes")
-	unitKb := flag.Bool("kb", false, "flag set a size unit as KBytes")
-	unitMb := flag.Bool("mb", false, "flag set a size unit as MBytes")
-	flag.Parse()
-
-	if *inputExpectedSize <= 0 && !*unitKb && !*unitMb && len(*inputFileName) <= 0 {
-		info()
-	}
-
-	if *inputExpectedSize <= 0 {
-		fmt.Println("specify --size arg")
-		fmt.Println("Use \"tabasco --help\" for more information")
-		fmt.Println("")
-		fmt.Println("PepperKit(c) 2021.")
-		fmt.Println("")
-		os.Exit(1)
-	}
-
-	f, err := os.Create(*inputFileName)
+	f, err := os.Create(args.FileName)
 	if err != nil {
 		log.Fatalln(err)
 	}
@@ -45,15 +29,15 @@ func main() {
 	f.Sync()
 
 	w := bufio.NewWriter(f)
-	expectedSize := *inputExpectedSize
-	paragrapSize:= 1
+	expectedSize := args.FileSize
+	paragrapSize := 1
 
-	if *unitKb {
+	if args.UnitKiloByte {
 		expectedSize = expectedSize * BYTE_FACTOR
 		paragrapSize = 8
 	}
 
-	if *unitMb {
+	if args.UnitMegaByte {
 		expectedSize = expectedSize * BYTE_FACTOR * BYTE_FACTOR
 		paragrapSize = 25
 	}
@@ -120,26 +104,4 @@ func textGenerator(paragrapSize int) TextResponse {
 type TextResponse struct {
 	Status  string `json:"status"`
 	Content string `json:"text"`
-}
-
-func info() {
-	fmt.Println("Tabasco is CLI tool to generate a placeholder text akka 'Lorem ipsum'.")
-	fmt.Println("")
-	fmt.Println("Usage: ")
-	fmt.Println("\t tabasco [--arguments]")
-	fmt.Println("")
-	fmt.Println("The argumnets are: ")
-	fmt.Println("\t file \t a file name")
-	fmt.Println("\t size \t an expected file size (in bytes by default)")
-	fmt.Println("\t kb \t a size will be read as KBytes")
-	fmt.Println("\t mb \t a size will be read as MBytes")
-	fmt.Println("")
-	fmt.Println("Use \"tabasco --help\" for more information")
-	fmt.Println("")
-	fmt.Println("Tabasco uses https://fish-text.ru service to get a random text. It means the Internet connection is important.")
-	fmt.Println("")
-	fmt.Println("MIT License")
-	fmt.Println("Copyright (c) 2021 PepperKit.")
-	fmt.Println("")
-	os.Exit(0)
 }
