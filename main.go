@@ -12,7 +12,9 @@ import (
 	"strconv"
 )
 
-const BYTE_FACTOR = 1024
+const byteFactor = 1024
+const kiloByteParagraphSize = 8
+const megaByteParagraphSize = 25
 
 func main() {
 	args := cmd.Parse()
@@ -30,23 +32,23 @@ func main() {
 
 	w := bufio.NewWriter(f)
 	expectedSize := args.FileSize
-	paragrapSize := 1
+	paragraphSize := 1 // default size
 
 	if args.UnitKiloByte {
-		expectedSize = expectedSize * BYTE_FACTOR
-		paragrapSize = 8
+		expectedSize = expectedSize * byteFactor
+		paragraphSize = kiloByteParagraphSize
 	}
 
 	if args.UnitMegaByte {
-		expectedSize = expectedSize * BYTE_FACTOR * BYTE_FACTOR
-		paragrapSize = 25
+		expectedSize = expectedSize * byteFactor * byteFactor
+		paragraphSize = megaByteParagraphSize
 	}
 
 	totalSize := 0
 
 	fmt.Println("Generating...")
 	for totalSize < expectedSize {
-		res := textGenerator(paragrapSize)
+		res := textGenerator(paragraphSize)
 		potentialSize := totalSize + len(res.Content)
 		if potentialSize > expectedSize {
 			needBytes := expectedSize - totalSize
