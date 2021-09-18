@@ -20,13 +20,21 @@ func main() {
 
 	file, err := os.Create(args.FileName)
 	checkError(err)
-
 	defer file.Close()
 
 	err = file.Sync()
 	checkError(err)
 
 	writer := bufio.NewWriter(file)
+
+	generateTextBySize(args, writer)
+
+	fi, _ := file.Stat()
+	fmt.Printf("Complete! The file %s has been generated.\n", fi.Name())
+	fmt.Printf("File size is %d bytes.", fi.Size())
+}
+
+func generateTextBySize(args *cmd.TabascoArgs, writer *bufio.Writer) {
 	expectedSize := args.FileSize
 	paragraphSize := 1 // default size
 
@@ -41,7 +49,6 @@ func main() {
 	}
 
 	totalSize := 0
-
 	fmt.Println("Generating...")
 	for totalSize < expectedSize {
 		res := txt.GenerateText(paragraphSize)
@@ -67,11 +74,7 @@ func main() {
 			totalSize += size
 		}
 	}
-
 	writer.Flush()
-	fi, _ := file.Stat()
-	fmt.Printf("Complete! The file %s has been generated.\n", fi.Name())
-	fmt.Printf("File size is %d bytes.", fi.Size())
 }
 
 func checkError(err error) {
