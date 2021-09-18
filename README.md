@@ -4,7 +4,7 @@ Simple Text Generator uses https://fish-text.ru service
 ## Usage
 
 ```
-Tabasco is a CLI tool to generate a placeholder text akka 'Lorem ipsum' generator.
+Tabasco is a CLI tool to generate a placeholder text akka 'Lorem ipsum'.
 
 Usage:
 	 tabasco [--arguments]
