@@ -12,8 +12,8 @@ Usage:
 The arguments are:
 	 file 	 a file name
 	 size 	 an expected file size (in bytes by default)
-	 kb 	 a size will be read as KBytes
-	 mb 	 a size will be read as MBytes
+	 kb 	 flag set a size unit as KBytes
+	 mb 	 flag set a size unit as MBytes
 
 Use "tabasco --help" for more information
 
