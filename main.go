@@ -23,7 +23,8 @@ func main() {
 
 	defer file.Close()
 
-	file.Sync()
+	err = file.Sync()
+	checkError(err)
 
 	writer := bufio.NewWriter(file)
 	expectedSize := args.FileSize
