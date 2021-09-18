@@ -40,12 +40,12 @@ func ValidateFileSize(args *TabascoArgs) {
 
 func Info(args *TabascoArgs) {
 	if args.FileSize <= 0 && !args.UnitKiloByte && !args.UnitMegaByte && len(args.FileName) <= 0 {
-		fmt.Println("Tabasco is CLI tool to generate a placeholder text akka 'Lorem ipsum'.")
+		fmt.Println("Tabasco is a CLI tool to generate a placeholder text akka 'Lorem ipsum'.")
 		fmt.Println("")
 		fmt.Println("Usage: ")
 		fmt.Println("\t tabasco [--arguments]")
 		fmt.Println("")
-		fmt.Println("The argumnets are: ")
+		fmt.Println("The arguments are: ")
 		fmt.Println("\t file \t a file name")
 		fmt.Println("\t size \t an expected file size (in bytes by default)")
 		fmt.Println("\t kb \t a size will be read as KBytes")
