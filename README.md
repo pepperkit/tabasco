@@ -12,8 +12,8 @@ Usage:
 The arguments are:
 	 file 	 a file name
 	 size 	 an expected file size (in bytes by default)
-	 kb 	 flag set a size unit as KBytes
-	 mb 	 flag set a size unit as MBytes
+	 kb 	 flag set a size unit as KiB
+	 mb 	 flag set a size unit as MiB
 
 Use "tabasco --help" for more information
 
@@ -25,13 +25,13 @@ Copyright (c) 2021 PepperKit.
 
 ## Example
 
-### Generate 1Mb size text file
+### Generate 1MiB size text file
 
 ```
 $ tabasco --file lorem.txt --size 1 --mb
 ```
 
-### Generate 2Kb size text file
+### Generate 2KiB size text file
 
 ```
 $ tabasco --file lorem.txt --size 2 --kb
