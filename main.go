@@ -31,7 +31,18 @@ func main() {
 
 	fi, _ := file.Stat()
 	fmt.Printf("Complete! The file %s has been generated.\n", fi.Name())
-	fmt.Printf("File size is %d bytes.", fi.Size())
+	fileSizeBytes := fi.Size()
+	fmt.Printf("File size is %d bytes\n", fileSizeBytes)
+
+	if fileSizeBytes > byteFactor {
+		fileSizeKiB := float64(fileSizeBytes / byteFactor)
+		fmt.Printf("File size is %.2f KiB\n", fileSizeKiB)
+	}
+
+	if fileSizeBytes > (byteFactor * byteFactor) {
+		fileSizeMiB := float64((fileSizeBytes / byteFactor) / byteFactor)
+		fmt.Printf("File size is %.2f MiB\n", fileSizeMiB)
+	}
 }
 
 func generateTextBySize(args *cmd.TabascoArgs, writer *bufio.Writer) {
