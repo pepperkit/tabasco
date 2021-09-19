@@ -7,10 +7,10 @@ import (
 )
 
 type TabascoArgs struct {
-	FileName     string
-	FileSize     int
-	UnitKiloByte bool
-	UnitMegaByte bool
+	FileName string
+	FileSize int
+	UnitKiB  bool
+	UnitMiB  bool
 }
 
 func Parse() *TabascoArgs {
@@ -20,10 +20,10 @@ func Parse() *TabascoArgs {
 	unitMb := flag.Bool("mb", false, "flag set a size unit as MBytes")
 	flag.Parse()
 	return &TabascoArgs{
-		FileName:     *inputFileName,
-		FileSize:     *inputExpectedSize,
-		UnitKiloByte: *unitKb,
-		UnitMegaByte: *unitMb,
+		FileName: *inputFileName,
+		FileSize: *inputExpectedSize,
+		UnitKiB:  *unitKb,
+		UnitMiB:  *unitMb,
 	}
 }
 

@@ -49,12 +49,12 @@ func generateTextBySize(args *cmd.TabascoArgs, writer *bufio.Writer) {
 	expectedSize := args.FileSize
 	paragraphSize := 1 // default size
 
-	if args.UnitKiloByte {
+	if args.UnitKiB {
 		expectedSize = expectedSize * byteFactor
 		paragraphSize = kiloByteParagraphSize
 	}
 
-	if args.UnitMegaByte {
+	if args.UnitMiB {
 		expectedSize = expectedSize * byteFactor * byteFactor
 		paragraphSize = megaByteParagraphSize
 	}
