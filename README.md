@@ -11,6 +11,7 @@ Usage:
 
 The arguments are:
 	 file 	 a file name
+	 docx 	 a file output format DOCX (if not set default is TXT)
 	 size 	 an expected file size (in bytes by default)
 	 kb 	 flag set a size unit as KiB
 	 mb 	 flag set a size unit as MiB
@@ -41,6 +42,12 @@ $ tabasco --file lorem.txt --size 2 --kb
 
 ```
 $ tabasco --file lorem.txt --size 512
+```
+
+### Generate 2KiB content size DOCX file
+
+```
+$ tabasco --file document.docx --docx --size 2 --kb
 ```
 
 ## License
