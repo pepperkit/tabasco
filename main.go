@@ -2,11 +2,11 @@ package main
 
 import (
 	"fmt"
+	"github.com/pepperkit/tabasco/cmd"
+	"github.com/pepperkit/tabasco/txt"
+	"github.com/pepperkit/tabasco/writer"
 	"log"
 	"os"
-	"pepperkit/tabasco/cmd"
-	"pepperkit/tabasco/txt"
-	"pepperkit/tabasco/writer"
 )
 
 const byteFactor = 1024

@@ -1,4 +1,4 @@
-module pepperkit/tabasco
+module github.com/pepperkit/tabasco
 
 go 1.16
 
