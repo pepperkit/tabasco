@@ -19,6 +19,9 @@ jobs:
           go-version: 1.17
         id: go
 
+      - name: Prepare Dependencies
+        run: go mod download github.com/gingfrederik/docx
+
       - name: Build
         run: go build -v ./...
 
