@@ -51,13 +51,13 @@ $ tabasco --file lorem.txt --size 512
 $ tabasco --file document.docx --docx --size 2 --kb
 ```
 
-## Generate **4KiB** content size **text** file in **latin** language
+### Generate **4KiB** content size **text** file in **latin** language
 
 ```
 $ tabasco --file plain-latin.txt --size 4 --kb --lang latin
 ```
 
-## Generate **8KiB** content size **text** file in **russian** language
+### Generate **8KiB** content size **text** file in **russian** language
 
 ```
 $ tabasco --file plain-ru.txt --size 8 --kb --lang ru
