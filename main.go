@@ -19,7 +19,6 @@ func main() {
 	cmd.ValidateFileSize(args)
 
 	generateTextBySize(args, newDocumentWriter(args))
-
 	makeReport(args.FileName)
 }
 
@@ -66,8 +65,8 @@ func generateTextBySize(args *cmd.TabascoArgs, wr writer.DocumentWriter) {
 	totalSize := 0
 	fmt.Println("Generating...")
 	for totalSize < expectedSize {
-		res := txt.GenerateText(paragraphSize)
-		potentialSize := totalSize + len(res.Content)
+		res := txt.GenerateText(paragraphSize, args.Language)
+		potentialSize := totalSize + len(res)
 		if potentialSize > expectedSize {
 			needBytes := expectedSize - totalSize
 
@@ -75,14 +74,14 @@ func generateTextBySize(args *cmd.TabascoArgs, wr writer.DocumentWriter) {
 				needBytes = expectedSize
 			}
 
-			potentialContent := []byte(res.Content)
+			potentialContent := []byte(res)
 
 			str := string(potentialContent[0:needBytes])
 			wr.WriteText(str)
-			totalSize += len([]byte(res.Content))
+			totalSize += len([]byte(res))
 		} else {
-			wr.WriteText(res.Content)
-			totalSize += len([]byte(res.Content))
+			wr.WriteText(res)
+			totalSize += len([]byte(res))
 		}
 	}
 
