@@ -1,5 +1,5 @@
 # tabasco
-Simple Text Generator uses https://fish-text.ru service
+Simple Text Generator uses https://fish-text.ru, https://baconipsum.com/ services.
 
 ## Usage
 
@@ -18,7 +18,7 @@ The arguments are:
 
 Use "tabasco --help" for more information
 
-Tabasco uses https://fish-text.ru service to get a random text. It means the Internet connection is important.
+Tabasco uses https://fish-text.ru, https://baconipsum.com/ services to get a random text. It means the Internet connection is important.
 
 MIT License
 Copyright (c) 2021 PepperKit.

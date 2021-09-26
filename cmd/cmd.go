@@ -3,7 +3,9 @@ package cmd
 import (
 	"flag"
 	"fmt"
+	"github.com/pepperkit/tabasco/txt"
 	"os"
+	"strings"
 )
 
 type TabascoArgs struct {
@@ -12,6 +14,7 @@ type TabascoArgs struct {
 	UnitKiB  bool
 	UnitMiB  bool
 	Docx     bool
+	Language txt.Lang
 }
 
 func Parse() *TabascoArgs {
@@ -20,14 +23,24 @@ func Parse() *TabascoArgs {
 	unitKb := flag.Bool("kb", false, "flag set a size unit as KBytes")
 	unitMb := flag.Bool("mb", false, "flag set a size unit as MBytes")
 	docx := flag.Bool("docx", false, "flag set an output format as DOCX")
+	lang := flag.String("lang", "ru", "choose a language, supported: ru, latin")
 	flag.Parse()
+	lg := parseLanguage(lang)
 	return &TabascoArgs{
 		FileName: *inputFileName,
 		FileSize: *inputExpectedSize,
 		UnitKiB:  *unitKb,
 		UnitMiB:  *unitMb,
 		Docx:     *docx,
+		Language: lg,
 	}
+}
+
+func parseLanguage(lang *string) txt.Lang {
+	if strings.EqualFold(*lang, "latin") {
+		return txt.LT
+	}
+	return txt.RU
 }
 
 func ValidateFileSize(args *TabascoArgs) {
@@ -54,10 +67,11 @@ func Info(args *TabascoArgs) {
 		fmt.Println("\t size \t an expected file size (in bytes by default)")
 		fmt.Println("\t kb \t\t flag set a size unit as KiB")
 		fmt.Println("\t mb \t\t flag set a size unit as MiB")
+		fmt.Println("\t lang \t choose a language, supported: ru, latin (default \"ru\")")
 		fmt.Println("")
 		fmt.Println("Use \"tabasco --help\" for more information")
 		fmt.Println("")
-		fmt.Println("Tabasco uses https://fish-text.ru service to get a random text. It means the Internet connection is important.")
+		fmt.Println("Tabasco uses https://fish-text.ru, https://baconipsum.com/ services to get a random text.\nIt means the Internet connection is important.")
 		fmt.Println("")
 		fmt.Println("MIT License")
 		fmt.Println("Copyright (c) 2021 PepperKit.")
