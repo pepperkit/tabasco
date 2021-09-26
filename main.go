@@ -1,12 +1,12 @@
 package main
 
 import (
-	"bufio"
 	"fmt"
 	"log"
 	"os"
 	"pepperkit/tabasco/cmd"
 	"pepperkit/tabasco/txt"
+	"pepperkit/tabasco/writer"
 )
 
 const byteFactor = 1024
@@ -18,17 +18,21 @@ func main() {
 	cmd.Info(args)
 	cmd.ValidateFileSize(args)
 
-	file, err := os.Create(args.FileName)
+	generateTextBySize(args, newDocumentWriter(args))
+
+	makeReport(args.FileName)
+}
+
+func newDocumentWriter(args *cmd.TabascoArgs) writer.DocumentWriter {
+	if args.Docx {
+		return writer.NewDocxWriter(args.FileName)
+	}
+	return writer.NewTxtWriter(args.FileName)
+}
+
+func makeReport(fileName string) {
+	file, err := os.Open(fileName)
 	checkError(err)
-	defer file.Close()
-
-	err = file.Sync()
-	checkError(err)
-
-	writer := bufio.NewWriter(file)
-
-	generateTextBySize(args, writer)
-
 	fi, _ := file.Stat()
 	fmt.Printf("Complete! The file %s has been generated.\n", fi.Name())
 	fileSizeBytes := fi.Size()
@@ -45,7 +49,7 @@ func main() {
 	}
 }
 
-func generateTextBySize(args *cmd.TabascoArgs, writer *bufio.Writer) {
+func generateTextBySize(args *cmd.TabascoArgs, wr writer.DocumentWriter) {
 	expectedSize := args.FileSize
 	paragraphSize := 1 // default size
 
@@ -74,19 +78,15 @@ func generateTextBySize(args *cmd.TabascoArgs, writer *bufio.Writer) {
 			potentialContent := []byte(res.Content)
 
 			str := string(potentialContent[0:needBytes])
-
-			size, err := writer.WriteString(str)
-			checkError(err)
-
-			totalSize += size
+			wr.WriteText(str)
+			totalSize += len([]byte(res.Content))
 		} else {
-			size, err := writer.WriteString(res.Content)
-			checkError(err)
-			totalSize += size
+			wr.WriteText(res.Content)
+			totalSize += len([]byte(res.Content))
 		}
 	}
-	err := writer.Flush()
-	checkError(err)
+
+	wr.Flush()
 }
 
 func checkError(err error) {

@@ -11,19 +11,22 @@ type TabascoArgs struct {
 	FileSize int
 	UnitKiB  bool
 	UnitMiB  bool
+	Docx     bool
 }
 
 func Parse() *TabascoArgs {
-	inputFileName := flag.String("file", "", "a file name")
+	inputFileName := flag.String("file", "", "a file name (default format is TXT)")
 	inputExpectedSize := flag.Int("size", 0, "a file expected size in bytes")
 	unitKb := flag.Bool("kb", false, "flag set a size unit as KBytes")
 	unitMb := flag.Bool("mb", false, "flag set a size unit as MBytes")
+	docx := flag.Bool("docx", false, "flag set an output format as DOCX")
 	flag.Parse()
 	return &TabascoArgs{
 		FileName: *inputFileName,
 		FileSize: *inputExpectedSize,
 		UnitKiB:  *unitKb,
 		UnitMiB:  *unitMb,
+		Docx:     *docx,
 	}
 }
 
@@ -47,9 +50,10 @@ func Info(args *TabascoArgs) {
 		fmt.Println("")
 		fmt.Println("The arguments are: ")
 		fmt.Println("\t file \t a file name")
+		fmt.Println("\t docx \t a file output format DOCX (if not set default is TXT)")
 		fmt.Println("\t size \t an expected file size (in bytes by default)")
-		fmt.Println("\t kb \t flag set a size unit as KiB")
-		fmt.Println("\t mb \t flag set a size unit as MiB")
+		fmt.Println("\t kb \t\t flag set a size unit as KiB")
+		fmt.Println("\t mb \t\t flag set a size unit as MiB")
 		fmt.Println("")
 		fmt.Println("Use \"tabasco --help\" for more information")
 		fmt.Println("")
