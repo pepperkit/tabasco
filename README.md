@@ -12,7 +12,7 @@ Usage:
 The arguments are:
 	 file 	 a file name
 	 docx 	 a file output format DOCX (if not set default is TXT)
-	 size 	 an expected file size (in bytes by default)
+	 size 	 an expected content size (in bytes by default)
 	 kb 	 flag set a size unit as KiB
 	 mb 	 flag set a size unit as MiB
 	 lang 	 choose a language, supported: ru, latin (default "ru")
