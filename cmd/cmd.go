@@ -19,7 +19,7 @@ type TabascoArgs struct {
 
 func Parse() *TabascoArgs {
 	inputFileName := flag.String("file", "", "a file name (default format is TXT)")
-	inputExpectedSize := flag.Int("size", 0, "expected a file content size (default: by bytes)")
+	inputExpectedSize := flag.Int("size", 0, "expected a file content size (default bytes)")
 	unitKb := flag.Bool("kb", false, "flag set a size unit as KiB")
 	unitMb := flag.Bool("mb", false, "flag set a size unit as MiB")
 	docx := flag.Bool("docx", false, "flag set an output format as DOCX")
