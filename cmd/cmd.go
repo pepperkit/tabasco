@@ -19,9 +19,9 @@ type TabascoArgs struct {
 
 func Parse() *TabascoArgs {
 	inputFileName := flag.String("file", "", "a file name (default format is TXT)")
-	inputExpectedSize := flag.Int("size", 0, "a file expected size in bytes")
-	unitKb := flag.Bool("kb", false, "flag set a size unit as KBytes")
-	unitMb := flag.Bool("mb", false, "flag set a size unit as MBytes")
+	inputExpectedSize := flag.Int("size", 0, "expected a file content size (default: by bytes)")
+	unitKb := flag.Bool("kb", false, "flag set a size unit as KiB")
+	unitMb := flag.Bool("mb", false, "flag set a size unit as MiB")
 	docx := flag.Bool("docx", false, "flag set an output format as DOCX")
 	lang := flag.String("lang", "ru", "choose a language, supported: ru, latin")
 	flag.Parse()
@@ -64,7 +64,7 @@ func Info(args *TabascoArgs) {
 		fmt.Println("The arguments are: ")
 		fmt.Println("\t file \t a file name")
 		fmt.Println("\t docx \t a file output format DOCX (if not set default is TXT)")
-		fmt.Println("\t size \t an expected file size (in bytes by default)")
+		fmt.Println("\t size \t an expected content size (in bytes by default)")
 		fmt.Println("\t kb \t flag set a size unit as KiB")
 		fmt.Println("\t mb \t flag set a size unit as MiB")
 		fmt.Println("\t lang \t choose a language, supported: ru, latin (default \"ru\")")
