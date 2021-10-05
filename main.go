@@ -18,8 +18,9 @@ func main() {
 	cmd.Info(args)
 	cmd.ValidateFileSize(args)
 
-	generateTextBySize(args, newDocumentWriter(args))
-	makeReport(args.FileName)
+	documentWriter := newDocumentWriter(args)
+	generateTextBySize(args, documentWriter)
+	makeReport(documentWriter.FileName())
 }
 
 func newDocumentWriter(args *cmd.TabascoArgs) writer.DocumentWriter {

@@ -10,7 +10,10 @@ import (
 type DocumentWriter interface {
 	WriteText(content string)
 	Flush()
+	FileName() string
 }
+
+const docxSuffix = ".docx"
 
 func NewTxtWriter(fileName string) DocumentWriter {
 	if len(fileName) <= 0 {
@@ -54,6 +57,10 @@ func (tw *TxtWriter) Flush() {
 	defer tw.file.Close()
 }
 
+func (tw *TxtWriter) FileName() string {
+	return tw.fileName
+}
+
 type DocxWriter struct {
 	fileName string
 	docxFile *docx.File
@@ -67,7 +74,7 @@ func NewDocxWriter(fileName string) DocumentWriter {
 	docFile := docx.NewFile()
 
 	return DocumentWriter(&DocxWriter{
-		fileName: fileName,
+		fileName: fileName + docxSuffix,
 		docxFile: docFile,
 	})
 }
@@ -79,4 +86,8 @@ func (dw *DocxWriter) WriteText(content string) {
 
 func (dw *DocxWriter) Flush() {
 	dw.docxFile.Save(dw.fileName)
+}
+
+func (dw *DocxWriter) FileName() string {
+	return dw.fileName
 }
